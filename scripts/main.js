@@ -93,6 +93,9 @@ function addToTable() {
       }
     }
   }
+  //clear input fields
+  taskToAdd.value = "";
+  priorityToAdd.value = "";
 }
 
 //toggle function for complete/incomplete status
