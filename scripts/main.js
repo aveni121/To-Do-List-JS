@@ -44,58 +44,61 @@ function displayInputField() {
 
 //function for adding input values to table
 function addToTable() {
-  emptyTasks.remove();
   const priorityToAdd = document.querySelector("#inPriority");
   const taskToAdd = document.querySelector("#inTask");
   const taskList = document.querySelectorAll("#taskPriority");
 
-  var newRow = document.createElement("tr");
-  newRow.setAttribute("class", "bg-danger");
-
-  var priorityNum = document.createElement("th");
-  priorityNum.setAttribute("id", "taskPriority");
-  priorityNum.textContent = priorityToAdd.value;
-
-  var task = document.createElement("td");
-  task.textContent = taskToAdd.value;
-
-  var statusContainer = document.createElement("td");
-  var status = document.createElement("button");
-  status.addEventListener("click", changeStatus);
-  status.textContent = "Incomplete";
-  statusContainer.appendChild(status);
-
-  var buttonContainer = document.createElement("td");
-  var removeButton = document.createElement("button");
-  removeButton.textContent = "Remove";
-  removeButton.addEventListener("click", removeRow);
-
-  buttonContainer.appendChild(removeButton);
-
-  newRow.appendChild(priorityNum);
-  newRow.appendChild(task);
-  newRow.appendChild(statusContainer);
-  newRow.appendChild(buttonContainer);
-
-  if (taskList.length === 0) {
-    tableBody.appendChild(newRow);
+  if (priorityToAdd.value === "" || taskToAdd.value === "") {
+    alert("Please fill out all the fields!");
   } else {
-    for (var i = 0; i < taskList.length; i++) {
-      currPriority = parseInt(taskList[i].textContent);
-      if (priorityToAdd.value < currPriority) {
-        taskList[i].parentNode.parentNode.insertBefore(
-          newRow,
-          taskList[i].parentNode
-        );
-        break;
-      } else {
-        tableBody.appendChild(newRow);
+    emptyTasks.remove();
+    var newRow = document.createElement("tr");
+    newRow.setAttribute("class", "bg-danger");
+
+    var priorityNum = document.createElement("th");
+    priorityNum.setAttribute("id", "taskPriority");
+    priorityNum.textContent = priorityToAdd.value;
+
+    var task = document.createElement("td");
+    task.textContent = taskToAdd.value;
+
+    var statusContainer = document.createElement("td");
+    var status = document.createElement("button");
+    status.addEventListener("click", changeStatus);
+    status.textContent = "Incomplete";
+    statusContainer.appendChild(status);
+
+    var buttonContainer = document.createElement("td");
+    var removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.addEventListener("click", removeRow);
+
+    buttonContainer.appendChild(removeButton);
+
+    newRow.appendChild(priorityNum);
+    newRow.appendChild(task);
+    newRow.appendChild(statusContainer);
+    newRow.appendChild(buttonContainer);
+
+    if (taskList.length === 0) {
+      tableBody.appendChild(newRow);
+    } else {
+      for (var i = 0; i < taskList.length; i++) {
+        currPriority = parseInt(taskList[i].textContent);
+        if (priorityToAdd.value < currPriority) {
+          taskList[i].parentNode.parentNode.insertBefore(
+            newRow,
+            taskList[i].parentNode
+          );
+          break;
+        } else {
+          tableBody.appendChild(newRow);
+        }
       }
     }
+    taskToAdd.value = "";
+    priorityToAdd.value = "";
   }
-  //clear input fields
-  taskToAdd.value = "";
-  priorityToAdd.value = "";
 }
 
 //toggle function for complete/incomplete status
