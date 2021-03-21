@@ -5,6 +5,7 @@ const inputContainer = document.querySelector("#inputContainer");
 const tableBody = document.querySelector("#tableBody");
 const emptyTasks = document.querySelector("#emptyTasks");
 
+//Toggle function for displaying input fields
 function displayInputField() {
   taskFormCount = document.querySelectorAll("#taskForm");
   console.log(taskFormCount.length);
@@ -41,6 +42,7 @@ function displayInputField() {
   }
 }
 
+//function for adding input values to table
 function addToTable() {
   emptyTasks.remove();
   const priorityToAdd = document.querySelector("#inPriority");
@@ -93,6 +95,7 @@ function addToTable() {
   }
 }
 
+//toggle function for complete/incomplete status
 function changeStatus() {
   var currRow = this.parentNode.parentNode;
   if (this.textContent === "Incomplete") {
@@ -104,6 +107,7 @@ function changeStatus() {
   }
 }
 
+//toggle function for removal of row
 function removeRow() {
   this.parentNode.parentNode.remove();
   var rowCount = document.querySelectorAll("#taskPriority");
